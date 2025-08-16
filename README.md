@@ -1,6 +1,6 @@
 # 🦀 Tradutor CLI - Rust
 
-Uma ferramenta de linha de comando simples e rápida para traduzir palavras do português para inglês.
+Uma ferramenta de linha de comando simples e rápida para traduzir palavras do português para inglês usando HashMap interno.
 
 ## 🚀 Como usar
 
@@ -15,7 +15,7 @@ cargo run -- casa
 ## 📋 Pré-requisitos
 
 - Rust instalado (https://rustup.rs/)
-- Arquivo `dicionario.txt` na raiz do projeto
+- Clap dependency configurada
 
 ## 🛠️ Instalação
 
@@ -26,14 +26,11 @@ git clone <seu-repositorio>
 cd grrs
 ```
 
-2. Crie o arquivo de dicionário:
+2. Adicione dependência no Cargo.toml:
 
-```bash
-echo "amarelo=yellow
-casa=house
-carro=car
-água=water
-livro=book" > dicionario.txt
+```toml
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
 ```
 
 3. Execute:
@@ -42,36 +39,31 @@ livro=book" > dicionario.txt
 cargo run -- palavra
 ```
 
-## 📝 Formato do dicionário
+## 📝 Dicionário interno
 
-O arquivo `dicionario.txt` deve seguir o formato:
+O dicionário está integrado no código usando HashMap para máxima performance. Palavras disponíveis:
 
-```
-palavra_portuguesa=english_word
-```
-
-Exemplo:
-
-```
-amarelo=yellow
-casa=house
-carro=car
-```
+- amarelo → yellow
+- casa → house
+- carro → car
+- água → water
+- livro → book
 
 ## 🔧 Como funciona
 
 1. **Input**: Recebe uma palavra em português como argumento
-2. **Busca**: Procura no arquivo `dicionario.txt`
+2. **Busca**: Consulta HashMap interno (O(1) - busca instantânea)
 3. **Output**: Retorna a tradução em inglês
 4. **Erro**: Mostra "Palavra não encontrada" se não existir
 
 ## 🎯 Recursos
 
-- ✅ Busca rápida em arquivo local
+- ✅ Busca ultra-rápida com HashMap (O(1))
 - ✅ Funciona offline
-- ✅ Case-insensitive (funciona com maiúsculas/minúsculas)
+- ✅ Zero dependência de arquivos externos
 - ✅ Mensagens de erro claras
 - ✅ Sintaxe simples
+- ✅ Dicionário integrado no binário
 
 ## 📚 Exemplos
 
@@ -87,15 +79,16 @@ cargo run -- elefante   # Palavra não encontrada
 
 ## 🚧 TODO
 
-- [ ] Adicionar mais palavras ao dicionário
+- [ ] Adicionar mais palavras ao HashMap interno
 - [ ] Suporte para frases
 - [ ] Tradução bidirecional (inglês → português)
+- [ ] Case-insensitive matching
 - [ ] Interface interativa
 - [ ] Exportar como binário executável
 
 ## 🤝 Contribuindo
 
-1. Adicione novas palavras ao `dicionario.txt`
+1. Adicione novas palavras ao HashMap no código
 2. Faça um fork do projeto
 3. Crie sua feature branch
 4. Commit suas mudanças
