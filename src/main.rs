@@ -1,5 +1,5 @@
 use clap::Parser;
-use std::fs;
+use std::collections::HashMap;
 
 #[derive(Parser)]
 struct Cli {
@@ -9,15 +9,18 @@ struct Cli {
 fn main() {
     let args = Cli::parse();
     
-    // TODO: ler arquivo
-    let conteudo = fs::read_to_string("dicionario.txt").expect("not possible a read you file");
+    let dicionario = HashMap::from([
+        ("amarelo", "yellow"),
+        ("casa", "house"),
+        ("carro", "car"),
+        ("água", "water"),
+        ("livro", "book"),
+    ]);
 
-    for linha in conteudo.lines(){
-        let partes: Vec<&str> = linha.split('=').collect();
-
-        if partes[0] == args.palavra {
-            println!("{}", partes[1]);
-            return;
-        }
+    if let Some(traducao) = dicionario.get(&*args.palavra){
+        println!("{}", traducao)
+    } else {
+        println!("Palavra não encontrada");
     }
+   
 }
