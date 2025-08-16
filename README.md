@@ -22,8 +22,8 @@ cargo run -- casa
 1. Clone o projeto:
 
 ```bash
-git clone <seu-repositorio>
-cd grrs
+git clone https://github.com/gustavokurtz/rust-br-translator.git
+cd rust-br-translator
 ```
 
 2. Adicione dependência no Cargo.toml:
@@ -85,6 +85,7 @@ cargo run -- elefante   # Palavra não encontrada
 - [ ] Case-insensitive matching
 - [ ] Interface interativa
 - [ ] Exportar como binário executável
+- [ ] Adicionar Suporte a API de tradução ou LLM
 
 ## 🤝 Contribuindo
 
