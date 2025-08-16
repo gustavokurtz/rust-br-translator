@@ -1,9 +1,12 @@
 [package]
-name = "rust-translator-br"
+name = "rust-br-translator"
 version = "0.1.0"
 edition = "2021"
 description = "Um pequeno tradutor de palavras português -> inglês"
 license = "MIT"
+repository = "https://github.com/gustavokurtz/rust-br-translator"
+homepage = "https://github.com/gustavokurtz/rust-br-translator"
+documentation = "https://docs.rs/rust-translator-br" 
 
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
