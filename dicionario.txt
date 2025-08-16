@@ -1,0 +1,3 @@
+amarelo=yellow
+casa=house
+carro=car
