@@ -1,7 +1,9 @@
 [package]
-name = "grrs"
+name = "rust-translator-br"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+description = "Um pequeno tradutor de palavras português -> inglês"
+license = "MIT"
 
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
