@@ -1,23 +1,33 @@
 # 🦀 Tradutor CLI - Rust
 
-Uma ferramenta de linha de comando simples e rápida para traduzir palavras do português para inglês usando HashMap interno.
+Uma ferramenta de linha de comando simples e rápida para traduzir palavras e frases do português para inglês usando a API LibreTranslate.
 
 ## 🚀 Como usar
 
 ```bash
-cargo run -- amarelo
-# Output: yellow
+# Palavra única
+cargo run -- olá
+# Output:
+# Tradução: hi
+# Alternativas: ["hello", "hey"]
 
-cargo run -- casa
-# Output: house
+# Frases (com aspas)
+cargo run -- "como você está?"
+# Output:
+# Tradução: how are you?
+# Alternativas: ["how are you doing?", "how do you do?"]
 ```
 
-## 📋 Pré-requisitos
+## 📦 Instalação
 
-- Rust instalado (https://rustup.rs/)
-- Clap dependency configurada
+### Via Cargo (Recomendado)
 
-## 🛠️ Instalação
+```bash
+cargo install rust-br-translator
+rust-br-translator olá mundo
+```
+
+### Via Código Fonte
 
 1. Clone o projeto:
 
@@ -26,75 +36,98 @@ git clone https://github.com/gustavokurtz/rust-br-translator.git
 cd rust-br-translator
 ```
 
-2. Adicione dependência no Cargo.toml:
+2. Instale dependências do sistema (Linux):
 
-```toml
-[dependencies]
-clap = { version = "4.0", features = ["derive"] }
+```bash
+# Ubuntu/Debian
+sudo apt install pkg-config libssl-dev
+
+# Fedora/CentOS
+sudo dnf install pkg-config openssl-devel
 ```
 
 3. Execute:
 
 ```bash
-cargo run -- palavra
+cargo run -- "palavra ou frase"
 ```
 
-## 📝 Dicionário interno
+## 📋 Pré-requisitos
 
-O dicionário está integrado no código usando HashMap para máxima performance. Palavras disponíveis:
-
-- amarelo → yellow
-- casa → house
-- carro → car
-- água → water
-- livro → book
+- Rust instalado (https://rustup.rs/)
+- Conexão com internet (usa API online)
+- No Linux: `pkg-config` e `libssl-dev` instalados
 
 ## 🔧 Como funciona
 
-1. **Input**: Recebe uma palavra em português como argumento
-2. **Busca**: Consulta HashMap interno (O(1) - busca instantânea)
-3. **Output**: Retorna a tradução em inglês
-4. **Erro**: Mostra "Palavra não encontrada" se não existir
+1. **Input**: Recebe palavra/frase em português como argumento
+2. **API**: Consulta LibreTranslate API (gustavodev.tech/translate)
+3. **Output**: Retorna tradução principal + alternativas
+4. **Offline**: Não funciona offline (requer internet)
 
 ## 🎯 Recursos
 
-- ✅ Busca ultra-rápida com HashMap (O(1))
-- ✅ Funciona offline
-- ✅ Zero dependência de arquivos externos
+- ✅ Tradução em tempo real via API
+- ✅ Múltiplas alternativas de tradução
+- ✅ Suporte a palavras e frases completas
+- ✅ API gratuita (sem necessidade de chave)
 - ✅ Mensagens de erro claras
-- ✅ Sintaxe simples
-- ✅ Dicionário integrado no binário
+- ✅ Interface CLI simples
+- ✅ Assíncrono e rápido
 
 ## 📚 Exemplos
 
 ```bash
-# Traduzir palavras
-cargo run -- amarelo    # yellow
-cargo run -- CASA       # house
-cargo run -- Carro      # car
+# Palavras simples
+cargo run -- casa          # house
+cargo run -- amarelo       # yellow
+cargo run -- computador    # computer
 
-# Palavra não encontrada
-cargo run -- elefante   # Palavra não encontrada
+# Frases (sempre usar aspas)
+cargo run -- "bom dia"           # good morning
+cargo run -- "como vai?"         # how are you?
+cargo run -- "eu gosto de café"  # I like coffee
+
+# Casos de erro
+cargo run -- xywz123      # Erro de tradução ou palavra inexistente
 ```
 
-## 🚧 TODO
+## 🔄 Mudanças da v0.1.0 → v0.2.0
 
-- [ ] Adicionar mais palavras ao HashMap interno
-- [ ] Suporte para frases
-- [ ] Tradução bidirecional (inglês → português)
-- [ ] Case-insensitive matching
-- [ ] Interface interativa
-- [ ] Exportar como binário executável
-- [ ] Adicionar Suporte a API de tradução ou LLM
+### ✅ Adicionado
+
+- Integração com API LibreTranslate
+- Suporte a frases completas
+- Múltiplas alternativas de tradução
+- Tradução online em tempo real
+- Tratamento de erros de rede
+
+### ❌ Removido
+
+- HashMap interno (não era escalável)
+- Funcionamento offline
+- Dicionário limitado integrado
+
+### 🔧 Melhorado
+
+- Qualidade das traduções (API vs dicionário fixo)
+- Cobertura de vocabulário (ilimitada)
+- Flexibilidade (palavras + frases)
 
 ## 🤝 Contribuindo
 
-1. Adicione novas palavras ao HashMap no código
-2. Faça um fork do projeto
-3. Crie sua feature branch
-4. Commit suas mudanças
+0. Olhe as issues
+1. Faça um fork do projeto
+2. Crie sua feature branch (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/nova-funcionalidade`)
 5. Abra um Pull Request
 
 ## 📄 Licença
 
 Este projeto é open source e está disponível sob a [MIT License](LICENSE).
+
+## 🙏 Agradecimentos
+
+- [LibreTranslate](https://libretranslate.com/) - API de tradução gratuita
+- [gustavodev.tech](https://gustavodev.tech/) - Endpoint da API utilizada
